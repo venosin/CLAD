@@ -1,26 +1,33 @@
-import mongoose from 'mongoose';
+import { Schema, model } from "mongoose";
 
-const categorySchema = new mongoose.Schema({
-    nombre: {
-        type: String,
-        required: true,
-        trim: true, // " Alabanza " -> "Alabanza"
+const categorySchema = new Schema(
+    {
+        nombre: {
+            type: String,
+            required: [true, "El nombre de la categoría es obligatorio."],
+            trim: true,
+            minlength: [2, "El nombre debe tener al menos 2 caracteres."],
+        },
+        descripcion: {
+            type: String,
+            trim: true,
+        },
+        thumbnailUrl: {
+            type: String,
+            trim: true,
+        },
+        slug: {
+            type: String,
+            lowercase: true,
+            unique: true,
+            trim: true,
+            required: [true, "El slug es obligatorio para la URL."],
+        },
     },
-    descripcion: {
-        type: String,
-    },
-    thumbnailUrl: {
-        type: String, // Imagen de portada de la serie/categoría
-    },
-    slug: {
-        type: String,
-        lowercase: true,
-        unique: true, // Para URLs amigables: miweb.com/series/vida-nueva
-    },
-}, {
-    timestamps: true,
-});
+    {
+        timestamps: true,
+        strict: false,
+    }
+);
 
-const Category = mongoose.model('Category', categorySchema);
-
-export default Category;
+export default model("Category", categorySchema);

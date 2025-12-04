@@ -1,7 +1,5 @@
 // Importar librerías necesarias
 import express from "express";
-// Importar librerías necesarias
-import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet"; // Importar helmet para seguridad
@@ -10,11 +8,13 @@ import path from "path";
 
 // Importar rutas
 import userRoutes from "./src/routes/userRoutes.js";
-import mediaRoutes from "./src/routes/mediaRoutes.js";
+import videoRoutes from "./src/routes/videoRoutes.js";
+import audioRoutes from "./src/routes/audioRoutes.js";
 import donationRoutes from "./src/routes/donationRoutes.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import categoryRoutes from "./src/routes/categoryRoutes.js";
 import progressRoutes from "./src/routes/progressRoutes.js";
+import passwordRoutes from "./src/routes/passwordRoutes.js";
 
 // Crear la instancia de la aplicación Express
 const app = express();
@@ -55,9 +55,11 @@ app.use(
 // Usar rutas
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/media", mediaRoutes);
+app.use("/api/videos", videoRoutes);
+app.use("/api/audios", audioRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/progress", progressRoutes);
+app.use("/api/password", passwordRoutes);
 
 export default app;
